@@ -72,7 +72,7 @@ function Footer() {
                   <span className="text-base font-medium">Phone:</span>
                   <a href="tel:+18001231324">
                     <span className="text-base font-medium">
-                      +27-82-360-8581
+                      +27 82-360-8581
                     </span>
                   </a>
                 </li>

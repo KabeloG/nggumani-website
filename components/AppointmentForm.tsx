@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -63,7 +63,7 @@ const formSchema = z.object({
 
 function AppointmentForm() {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isPending, startTransition] = useTransition();
   const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
 
   const getNextDay = () => {
@@ -143,8 +143,6 @@ function AppointmentForm() {
       return;
     }
 
-    setIsSubmitting(true);
-
     const formattedData = {
       ...data,
       dateTime: format(data.dateTime, "yyyy-MM-dd HH:mm"), // convert dateTime to string
@@ -154,7 +152,6 @@ function AppointmentForm() {
 
     if (response.success) {
       setLastSubmissionTime(currentTime);
-      setIsSubmitting(false);
 
       toast({
         title: "Appointment Scheduled",
@@ -165,8 +162,6 @@ function AppointmentForm() {
         duration: 5000,
       });
     } else {
-      setIsSubmitting(false);
-
       toast({
         title: "Something went wrong",
         description:
@@ -350,11 +345,11 @@ function AppointmentForm() {
         />
 
         <EarButton
-          inActive={isSubmitting || Date.now() - lastSubmissionTime < 30000}
+          inActive={isPending || Date.now() - lastSubmissionTime < 30000}
           text={
-            isSubmitting ? "Booking Your Appointment..." : "Book An Appointment"
+            isPending ? "Booking Your Appointment..." : "Book An Appointment"
           }
-          click={form.handleSubmit(onSubmit)}
+          click={() => startTransition(form.handleSubmit(onSubmit))}
         />
       </form>
     </Form>

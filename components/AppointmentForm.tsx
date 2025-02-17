@@ -33,7 +33,7 @@ import {
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
-import { createAppointment } from "@/actions/actions";
+import { createAppointment } from "@/actions/createAppointment";
 
 const formSchema = z.object({
   fName: z.string().min(2, {

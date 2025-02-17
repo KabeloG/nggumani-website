@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useTransition } from "react";
+import React, { useState, useActionState } from "react";
 import Image from "next/image";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -34,6 +34,7 @@ import {
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { useToast } from "@/hooks/use-toast";
 import { createAppointment } from "@/actions/createAppointment";
+import { useFormStatus } from "react-dom";
 
 const formSchema = z.object({
   fName: z.string().min(2, {
@@ -63,7 +64,7 @@ const formSchema = z.object({
 
 function AppointmentForm() {
   const { toast } = useToast();
-  const [isPending, startTransition] = useTransition();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
 
   const getNextDay = () => {
@@ -148,9 +149,12 @@ function AppointmentForm() {
       dateTime: format(data.dateTime, "yyyy-MM-dd HH:mm"), // convert dateTime to string
     };
 
+    setIsSubmitting(true);
+
     const response = await createAppointment(formattedData);
 
     if (response.success) {
+      setIsSubmitting(false);
       setLastSubmissionTime(currentTime);
 
       toast({
@@ -162,6 +166,8 @@ function AppointmentForm() {
         duration: 5000,
       });
     } else {
+      setIsSubmitting(false);
+
       toast({
         title: "Something went wrong",
         description:
@@ -345,11 +351,11 @@ function AppointmentForm() {
         />
 
         <EarButton
-          inActive={isPending || Date.now() - lastSubmissionTime < 30000}
+          inActive={isSubmitting || Date.now() - lastSubmissionTime < 30000}
           text={
-            isPending ? "Booking Your Appointment..." : "Book An Appointment"
+            isSubmitting ? "Booking Your Appointment..." : "Book An Appointment"
           }
-          click={() => startTransition(form.handleSubmit(onSubmit))}
+          click={form.handleSubmit(onSubmit)}
         />
       </form>
     </Form>

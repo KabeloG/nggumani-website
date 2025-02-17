@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model Appointments {
+  id        String   @id @default(uuid())
+  fName     String
+  lName     String
+  dateTime  String
+  createdAt DateTime @default(now())
+  phone     String
+}
+
+model Dependant {
+  dependantId          Int      @id @default(autoincrement())
+  medicalAidHolderId   Int
+  createdAt            DateTime @default(now())
+  dependantDateOfBirth String?
+  dependantFullName    String?
+  dependantGender      Gender?
+  Patient              Patient  @relation(fields: [medicalAidHolderId], references: [patientId], onDelete: Cascade)
+}
+
+model Patient {
+  patientId                   Int             @id @default(autoincrement())
+  homeAddress                 String?
+  paymentType                 PaymentType     @default(MEDICAL_AID)
+  medicalAidNumber            String?
+  medicalAidPlan              String?
+  createdAt                   DateTime        @default(now())
+  medicalAidHolderFullName    String?
+  medicalAidName              MedicalAidName?
+  patientFullName             String
+  medicalAidHolderIdNumber    String?
+  medicalAidHolderPhone       String?
+  medicalAidHolderSecondPhone String?
+  patientIdNumber             String
+  Dependant                   Dependant[]
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+enum MedicalAidName {
+  DISCOVERY
+  BONITAS
+  MOMENTUM
+  MEDIHELP
+  GEMS
+  BESTMED
+  PROFMED
+  SISONKE
+  CAPE_MEDICAL_PLAN
+  HOSMED
+  KEYHEALTH
+  LA_HEALTH
+  MEDSHIELD
+  SPECTRAMED
+  THEBEMED
+  FEDHEALTH
+  GENESIS
+  NATIONAL_HEALTHCARE_GROUP
+  OTHER
+}
+
+enum PaymentType {
+  CASH
+  MEDICAL_AID
+}

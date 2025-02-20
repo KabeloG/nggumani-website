@@ -61,7 +61,7 @@ function Footer() {
 
             <div className="mt-8">
               <ul className="space-y-3">
-                <li className="flex flex-col">
+                <li className="flex flex-col mt-1">
                   <span className="text-base font-medium">Address:</span>
                   <span className="text-base font-medium">
                     593 P.West, Thohoyandou, Limpopo
@@ -70,11 +70,25 @@ function Footer() {
 
                 <li className="flex flex-col">
                   <span className="text-base font-medium">Phone:</span>
-                  <a href="tel:+18001231324">
-                    <span className="text-base font-medium">
-                      +27 82-360-8581
-                    </span>
-                  </a>
+                  <div className="flex flex-col space-y-3 mt-1">
+                    <a href="tel:+27823608581">
+                      <span className="text-base font-medium">
+                        +27 (0)82 360 8581
+                      </span>
+                    </a>
+
+                    <a href="tel:+27725798089">
+                      <span className="text-base font-medium">
+                        +27 (0)72 579 8089
+                      </span>
+                    </a>
+
+                    <a href="tel:+27645070275">
+                      <span className="text-base font-medium">
+                        +27 (0)64 507 0275
+                      </span>
+                    </a>
+                  </div>
                 </li>
               </ul>
             </div>

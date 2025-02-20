@@ -54,8 +54,8 @@ const formSchema = z.object({
     (date) =>
       date.getDay() >= 1 &&
       date.getDay() <= 4 && // Monday to Thursday
-      date.getHours() >= 8 &&
-      date.getHours() <= 16, // 08:00 - 17:00
+      date.getHours() >= 9 &&
+      date.getHours() <= 16, // 09:00 - 17:00
     {
       message: "Date must be Monday to Thursday between 08:00 and 16:00.",
     }
@@ -68,10 +68,18 @@ function AppointmentForm() {
   const [lastSubmissionTime, setLastSubmissionTime] = useState<number>(0);
 
   const getNextDay = () => {
-    const now = new Date();
-    const nextDay = new Date(now);
-    nextDay.setDate(now.getDate() + 1);
-    nextDay.setHours(8, 0, 0, 0);
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const nextDay = new Date(today); // Copy today’s date
+
+    // If today is Thursday (4), Friday (5), Saturday (6), or Sunday (0), move to Monday. 8 ensures we jump correct num days to reach Mon
+    if (dayOfWeek >= 4 || dayOfWeek === 0) {
+      nextDay.setDate(today.getDate() + (8 - dayOfWeek)); // Set to Monday
+    } else {
+      nextDay.setDate(today.getDate() + 1); // Set to following day
+    }
+
+    nextDay.setHours(9, 0, 0, 0);
 
     return nextDay;
   };
@@ -89,14 +97,17 @@ function AppointmentForm() {
 
   function handleDateSelect(date: Date | undefined) {
     if (!date || isPast(date)) {
-      toast({ description: "Please select a future date" });
+      toast({
+        description: "Please select a future date",
+        variant: "destructive",
+      });
       return;
     }
 
     if (date.getDay() < 1 || date.getDay() > 4) {
       toast({
         description: "Appointments are only available Monday to Thursday",
-        variant: "warning",
+        variant: "destructive",
       });
       return;
     }
@@ -113,7 +124,7 @@ function AppointmentForm() {
     if (type === "hour") {
       const hour = parseInt(value, 10);
 
-      if (hour >= 8 && hour <= 16) {
+      if (hour >= 9 && hour <= 16) {
         newDate.setHours(hour);
       } else {
         toast({
@@ -257,9 +268,9 @@ function AppointmentForm() {
                       )}
                     >
                       {field.value ? (
-                        format(field.value, "yyyy/MM/dd HH:mm") // 24-hour format
+                        format(field.value, "dd/MM/yyyy HH:mm") // 24-hour format
                       ) : (
-                        <span>YYYY/MM/DD HH:mm</span>
+                        <span>DD/MM/YYYY HH:mm</span>
                       )}
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
@@ -272,7 +283,12 @@ function AppointmentForm() {
                       mode="single"
                       selected={field.value}
                       onSelect={handleDateSelect}
-                      disabled={(date) => isPast(date)}
+                      disabled={(date) =>
+                        isPast(date) ||
+                        date.getDay() === 5 ||
+                        date.getDay() === 6 ||
+                        date.getDay() === 0
+                      }
                       initialFocus
                     />
                     <div className="flex flex-col sm:flex-row sm:h-[300px] divide-y sm:divide-y-0 sm:divide-x">
@@ -280,7 +296,7 @@ function AppointmentForm() {
                       <ScrollArea className="w-64 sm:w-auto">
                         <div className="flex sm:flex-col p-2">
                           {Array.from({ length: 24 }, (_, i) => i)
-                            .filter((hour) => hour >= 8 && hour <= 16) // Only include hours from 08:00 to 16:00
+                            .filter((hour) => hour >= 9 && hour <= 16) // Only include hours from 09:00 to 16:00
                             .map((hour) => (
                               <Button
                                 key={hour}

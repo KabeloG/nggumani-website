@@ -43,12 +43,32 @@ function MedicalAids() {
     },
     {
       id: 8,
-      image: "/images/bestmed.svg",
+      image: "/images/polmed.png",
       alt: "aid-logo",
     },
     {
       id: 9,
+      image: "/images/bestmed.svg",
+      alt: "aid-logo",
+    },
+    {
+      id: 10,
       image: "/images/prof.svg",
+      alt: "aid-logo",
+    },
+    {
+      id: 11,
+      image: "/images/samwumed.png",
+      alt: "aid-logo",
+    },
+    {
+      id: 12,
+      image: "/images/medscheme.png",
+      alt: "aid-logo",
+    },
+    {
+      id: 13,
+      image: "/images/fedhealth.jpg",
       alt: "aid-logo",
     },
   ];

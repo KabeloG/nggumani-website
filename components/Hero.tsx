@@ -7,10 +7,10 @@ function Hero() {
       className="flex flex-col justify-start
   gap-10 border border-[#DAD9DC]"
     >
-      <div id="hero" className="w-full lg:min-h-[500px]">
+      <div id="hero" className="w-full lg:min-h-[680px]">
         <div
           className="bg-[#f0f2f480] border border-white rounded-[5px] p-[30px] 
-        m-5 backdrop-blur-[10px] max-lg:text-center lg:my-20 lg:max-w-[790px]"
+        m-5 backdrop-blur-[10px] max-lg:text-center lg:my-40 lg:min-h-[360px] lg:max-w-[790px]"
         >
           <div>
             <h1 className="font-sora font-light text-[38px] leading-[1.1em] tracking-[-3px] md:text-[58px]">
@@ -24,7 +24,7 @@ function Hero() {
             </h3>
           </div>
 
-          <div className="flex flex-col items-center space-y-3 mt-3 lg:flex-row lg:space-y-0 lg:space-x-3">
+          <div className="flex flex-col items-center space-y-3 mt-3 lg:flex-row lg:space-y-0 lg:space-x-3 lg:mt-10">
             <ScrollButton
               text="NG Gumani Ear Clinic Services"
               targetId="services"

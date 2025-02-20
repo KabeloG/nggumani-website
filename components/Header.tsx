@@ -31,7 +31,7 @@ function Header() {
       </div>
 
       {/* Bottom */}
-      <div className="flex flex-1 items-center justify-between p-5 gap-8 lg:px-10">
+      <div className="flex flex-1 items-center justify-between p-5 gap-8 lg:px-10 lg:py-2">
         <div>
           <Link href="/">
             <Image

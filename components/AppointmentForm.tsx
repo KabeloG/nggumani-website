@@ -45,7 +45,7 @@ const formSchema = z.object({
   }),
   phone: z
     .string()
-    .regex(/^\+?[1-9]\d{1,14}$/, "Invalid phone number")
+    .regex(/^(\+?[0-9]{1,3}[0-9]{7,9}|0[0-9]{9})$/, "Invalid phone number")
     .max(12)
     .min(10, {
       message: "Phone number is required",

@@ -1,6 +1,7 @@
 import React from "react";
 import AppointmentForm from "./AppointmentForm";
 import MedicalAids from "./MedicalAids";
+import Image from "next/image";
 
 function Appointment() {
   return (
@@ -26,15 +27,34 @@ function Appointment() {
           <div>
             <AppointmentForm />
           </div>
+
+          <div className="mt-10 lg:hidden">
+            <Image
+              src="/images/drnggumani.jpg"
+              alt="dr ng gumani"
+              width={800}
+              height={400}
+            />
+
+            <div className="flex-1 bg-[#F6F4F0] mt-6 space-y-2 z-10 text-center">
+              <h4 className="text-[20px] text-secondary leading-[1.45em]">
+                Dr. NG Gumani
+              </h4>
+              <p className="text-[15px] text-[#95949C] leading-[1.6em]">
+                Audiologist & Speech Pathologist - B. Logopaedics, dip.sp & h
+                comwrk (Wits University)
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Right (Large Screen) */}
-        <div className="hidden bg-[#F6F4F0] z-0 w-[24%] lg:inline-flex lg:bg-appointment-form lg:bg-cover lg:bg-center lg:bg-no-repeat lg:items-end">
+        <div className="hidden bg-[#F6F4F0] z-0 lg:w-[40%] lg:inline-flex lg:bg-appointment-form lg:bg-cover lg:bg-center lg:bg-no-repeat lg:items-end xl:w-[24%]">
           <div className="border-l flex-1 bg-[#F6F4F0] py-10 px-3 z-10">
             <h4 className="text-[19px] text-secondary leading-[1.45em] lg:text-[24px]">
               Dr. NG Gumani
             </h4>
-            <p className="text-[14px] text-[#95949C] leading-[1.6em] md:text-[16px] lg:text-[18px]">
+            <p className="text-[14px] text-[#95949C] leading-[1.6em] lg:text-[18px]">
               Audiologist & Speech Pathologist - B. Logopaedics, dip.sp & h
               comwrk (Wits University)
             </p>

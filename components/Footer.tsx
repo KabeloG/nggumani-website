@@ -19,7 +19,7 @@ function Footer() {
           </Link>
         </div>
 
-        <div className="flex flex-col mt-14 space-y-14 lg:grid lg:grid-cols-3 lg:space-y-0 lg:space-x-16 lg:pr-28">
+        <div className="flex flex-col mt-10 space-y-14 lg:mt-14 lg:grid lg:grid-cols-3 lg:space-y-0 lg:space-x-16 lg:pr-28">
           {/* Grid Col 1 */}
           <div className="text-center md:text-start">
             <h2 className="text-lg md:text-center md:text-[21px] lg:text-2xl">

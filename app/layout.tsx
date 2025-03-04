@@ -7,9 +7,9 @@ import BackToTop from "@/components/BackToTop";
 import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
-  title: "NG Gumani Ear Clinic | Trusted Ear Doctor in Limpopo",
+  title: "NG Gumani Ear Clinic | Trusted Ear Doctor & Hearing Care in Limpopo",
   description:
-    "Looking for an ear doctor in Limpopo? NG Gumani Ear Clinic provides expert hearing test, hearing aids and personalized care across Limpopo. Book your consultation today!",
+    "At NG Gumani Ear Clinic, our experienced ear doctor and speech therapist provide personalized hearing care across Limpopo. With 30+ years of expertise, we offer hearing tests, hearing aids, and solutions tailored to your needs.",
 };
 
 const sora = Sora({

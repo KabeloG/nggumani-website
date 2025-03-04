@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://nggumani.co.za
+
+# Sitemaps
+Sitemap: https://nggumani.co.za/sitemap.xml
